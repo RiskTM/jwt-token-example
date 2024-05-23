@@ -6,7 +6,7 @@ const {verifyToken} = require("./services/verifyToken");
 const ROOTPATH = process.env.ROOTPATH;
 
 const authenticateToken =  function (req, res, next){
-        const accessToken = req.headers["authorization"];
+        const accessToken = req.headers["authorization"].split(" ")[1];
         const refreshToken = req.body.refreshToken;
 
         if (accessToken != null){

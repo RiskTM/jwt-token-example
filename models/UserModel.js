@@ -24,7 +24,7 @@ const deleteUser = async (username) => {
         client.end();
 }
 
-async function getPasswordForUsername(username){
+const getPasswordForUsername = async (username) => {
         const client = await getClient();
         const res = await client.query(`Select password from ${db_user} where username like ${username}`);
         client.end();

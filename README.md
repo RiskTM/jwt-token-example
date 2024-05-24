@@ -25,6 +25,8 @@ now change the `.env` file to fit your specification. For help see the next sect
 
 The expiration time can be changed in `/services/createTokens.js`. By default 15m for the accessToken and 7d for the refreshToken are selected.
 
+The DB need to have the table "PG_DB_USER" with two columns username and password. For a refrence look at `init.sql`
+
 ``` bash
 node server.js # for development use: npm run devStart
 ```

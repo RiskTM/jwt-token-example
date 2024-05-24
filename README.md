@@ -25,6 +25,8 @@ now change the `.env` file to fit your specification. For help see the next sect
 
 The expiration time can be changed in `/services/createTokens.js`. By default 15m for the accessToken and 7d for the refreshToken are selected.
 
+The database is accessed through prisma. Therefore to initialize the table run `npx prisma migrate dev --name init`. This will lead to prisma generating the user table on your DB Server.
+
 ``` bash
 node server.js # for development use: npm run devStart
 ```
@@ -32,20 +34,15 @@ node server.js # for development use: npm run devStart
 ## `.env` explained
 
 ```bash
-# postgres settings
-PG_HOST="0.0.0.0" 
-PG_PORT="5432"
-PG_USER="admin"
-PG_PASSWORD="admin"
-PG_DATABASE="jwt_local_test"
-PG_DB_USER="jwt_whitelist" # this is the table for the users
-
 PORT="3000" # the port the server listens to
 ROOTPATH="/path/to/repo"
 
 # key for the JWT generation
 ACCESS_TOKEN="access_token_key"
 REFRESH_TOKEN="refresh_token_key"
+
+# url for prisma 
+DATABASE_URL="postfresql://user:password@url:port/database"
 ```
 
 
@@ -91,6 +88,7 @@ optional: body = {
 - bcryptJS
 - JWT (jsonwebtoken)
 - postgresql
+- prisma
 - HTML
 
 
@@ -99,5 +97,6 @@ optional: body = {
 <img align="left" alt="ExpressJS" width="40px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg" />
 <img align="left" alt="jwt" width="40px" style="padding-right:10px;" src="https://img.icons8.com/?size=100&id=rHpveptSuwDz&format=png&color=000000" />
 <img align="left" alt="postgresql" width="40px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-plain-wordmark.svg" />
+<img align="left" alt="prisma" width="40px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" />
 <img align="left" alt="HTML" width="40px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-plain.svg" />
 

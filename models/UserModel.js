@@ -3,7 +3,7 @@ const prisma = new PrismaClient()
 
 const addUser = async (username, password) => {
         await prisma.user.create({data: {username: username, password: password}})
-        .catch(e => {console.log("error occured")})
+        .catch(e => {console.log("error occured");})
 }
       
 const deleteUser = async (username) => {

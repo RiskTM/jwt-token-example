@@ -15,6 +15,7 @@ const generateAccessTokenFromRefreshToken = (req, res) => {
                 res.json({
                         accessToken: accessToken
                 });
+                res.sendStatus(202);
         }
         else {
                 res.sendStatus(403);

@@ -1,0 +1,306 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API for jwt token authentication",
+    "version": "1.0",
+    "title": "API jwt token"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "sends landing page"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Credentials",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Succesfull and token created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "accessToken": {
+                  "type": "string"
+                },
+                "refreshToken": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Could not login",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        }
+      }
+    },
+    "/user/addUser": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "",
+        "description": "",
+        "parameters": [
+          {
+            "name": "Credentials",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "adds User if already exists do nothing"
+          }
+        }
+      }
+    },
+    "/token": {
+      "post": {
+        "tags": [
+          "token"
+        ],
+        "summary": "",
+        "description": "Creats a accessToken from the refreshToken",
+        "parameters": [
+          {
+            "name": "refreshToken",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "created a accessToken",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "accessToken": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token was given"
+          },
+          "403": {
+            "description": "token invalid"
+          }
+        }
+      }
+    },
+    "/api": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Example: BEARER token"
+          },
+          {
+            "name": "refreshToken",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string",
+                  "example": "q313124.sr3adsaw2.erwr23"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns landing page"
+          },
+          "401": {
+            "description": "couldn't authenticate"
+          }
+        }
+      }
+    },
+    "/api/getAge": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Example: BEARER token"
+          },
+          {
+            "name": "refreshToken",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string",
+                  "example": "q313124.sr3adsaw2.erwr23"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns age of developer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "age": {
+                  "type": "integer",
+                  "example": 22
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "couldn't authenticate"
+          }
+        }
+      }
+    },
+    "/api/getName": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "summary": "",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Example: BEARER token"
+          },
+          {
+            "name": "refreshToken",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "type": "string",
+                  "example": "q313124.sr3adsaw2.erwr23"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "returns name of developer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Samuel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "couldn't authenticate"
+          }
+        }
+      }
+    }
+  }
+}

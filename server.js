@@ -1,5 +1,5 @@
 const express = require("express");
-const {authenticateToken} = require("./middleware.js");
+const {authenticateToken} = require("./middleware/middleware.js");
 require("dotenv").config();
 
 const app = express();

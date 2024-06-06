@@ -9,9 +9,11 @@ const login = async function (req, res) {
         const password = req.body.password;
         
         if ( validatePassword(username, password)){
+                res.sendStatus(202);
                 res.json(createTokens(username));
         }
         else {
+                res.sendStatus(400);
                 res.json({});
         }
 }

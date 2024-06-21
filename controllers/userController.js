@@ -1,10 +1,27 @@
-const {generateUser} = require("../services/generateUser");
 
-async function addNewUser(req, res){
+const services = require("../Services");
+
+const addUser = async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
-        await generateUser(username, password);
-        res.sendStatus(202);
+
+        if (await services.addUserToDB(username, password)){
+                res.sendStatus(202);
+                return;
+        }
+        res.sendStatus(208);
 }
 
-module.exports = {addNewUser};
+const deleteUser = async(req, res) => {
+        const username = req.body.username;
+        const password = req.body.password;
+
+        if (await services.validatePassword(username, password)){
+                await services.deleteUserInDB(username)
+                res.sendStatus(202);
+                return;
+        }
+        res.sendStatus(208);
+}
+
+module.exports = {addUser, deleteUser};

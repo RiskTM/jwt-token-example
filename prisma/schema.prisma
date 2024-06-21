@@ -8,8 +8,26 @@ datasource db {
 }
 
 model User {
-  username String @id @unique
-  password String
+  username             String                  @id @unique
+  password             String
+  accessTokenBlackList accessTokenBlackList[]
+  refreshToken         refreshTokenBlackList[]
+}
+
+model refreshTokenBlackList {
+  id           Int    @id @default(autoincrement())
+  token        String
+  expiresAt    String // isoString
+  User         User   @relation(fields: [userUsername], references: [username])
+  userUsername String @unique
+}
+
+model accessTokenBlackList {
+  id           Int    @id @default(autoincrement())
+  token        String
+  expiresAt    String // isoString
+  user         User   @relation(fields: [userUsername], references: [username])
+  userUsername String
 }
 
 // npx prisma migrate dev --name init

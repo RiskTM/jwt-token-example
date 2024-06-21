@@ -1,7 +1,7 @@
-const express = require("express");
-const router = express.Router();
+const {Router} = require("express");
+const router = Router();
 
-const {api_landing_page, getName, getAge} = require("../controllers/apiController.js");
+const {getAge, getName, api_landing_page} = require("../controllers/apiController");
 
 router.post("/", api_landing_page);
 router.post("/getName", getName);

@@ -8,23 +8,32 @@ datasource db {
 }
 
 model User {
-  username             String                  @id @unique
-  password             String
-  accessTokenBlackList accessTokenBlackList[]
-  refreshToken         refreshTokenBlackList[]
+  username              String                  @id @unique
+  password              String
+  accessTokenBlackList  accessTokenBlackList[]
+  refreshToken          refreshTokenBlackList[]
+  refreshTokenWhitelist refreshTokenWhitelist[]
 }
 
 model refreshTokenBlackList {
   id           Int    @id @default(autoincrement())
-  token        String
+  token        String @unique
   expiresAt    String // isoString
   User         User   @relation(fields: [userUsername], references: [username])
-  userUsername String @unique
+  userUsername String
+}
+
+model refreshTokenWhitelist {
+  id           Int    @id @default(autoincrement())
+  token        String @unique
+  expiresAt    String
+  User         User   @relation(fields: [userUsername], references: [username])
+  userUsername String
 }
 
 model accessTokenBlackList {
   id           Int    @id @default(autoincrement())
-  token        String
+  token        String @unique
   expiresAt    String // isoString
   user         User   @relation(fields: [userUsername], references: [username])
   userUsername String
